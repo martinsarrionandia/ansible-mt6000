@@ -1,0 +1,11 @@
+---
+
+- name: Install ACME packages for cert management
+  community.openwrt.opkg:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - acme
+    - acme-acmesh-dnsapi
+    - luci-app-acme

@@ -1,0 +1,24 @@
+---
+
+- name: Configure ACME certificate
+  community.openwrt.uci:
+    command: section
+    config: acme
+    type: cert
+    name: webui
+    value:
+      enabled: "1"
+      validation_method: dns
+      dns: dns_aws
+      keylength: "{{ acme_keylength }}"
+      update_uhttpd: "1"
+      domains: "{{ inventory_hostname }}"
+      credentials:
+        - "AWS_ACCESS_KEY_ID={{ route53_access_key_id }}"
+        - "AWS_SECRET_ACCESS_KEY={{ route53_secret_access_key }}"
+  no_log: true
+
+- name: Commit ACME config
+  community.openwrt.uci:
+    command: commit
+    config: acme

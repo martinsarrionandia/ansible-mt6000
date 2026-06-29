@@ -1,0 +1,4 @@
+- name: reload system
+  community.openwrt.service:
+    name: system
+    state: reloaded

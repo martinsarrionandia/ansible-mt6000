@@ -1,0 +1,3 @@
+acme_keylength: ec-256
+acme_domains:
+  - "{{ inventory_hostname }}"

@@ -1,0 +1,10 @@
+---
+
+- name: Update stuff
+  hosts: router
+  gather_facts: false
+  roles:
+    - hostname
+    - packages
+  become: true
+  become_user: root

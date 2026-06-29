@@ -1,0 +1,13 @@
+---
+
+- name: Set hostname
+  community.openwrt.uci:
+    command: set
+    key: system.@system[0].hostname
+    value: "{{ inventory_hostname }}"
+  notify: reload system
+
+- name: Commit system config
+  community.openwrt.uci:
+    command: commit
+    config: system
