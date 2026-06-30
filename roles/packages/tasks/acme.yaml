@@ -9,3 +9,8 @@
     - acme
     - acme-acmesh-dnsapi
     - luci-app-acme
+
+- name: Enable ACME renewal service
+  community.openwrt.service:
+    name: acme
+    enabled: true

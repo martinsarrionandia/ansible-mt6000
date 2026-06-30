@@ -1,2 +1,3 @@
 ---
-acme_keylength: ec-384
+acme_account_email: "martin@sarrionandia.co.uk"
+acme_keytype: ec-384

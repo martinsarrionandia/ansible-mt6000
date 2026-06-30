@@ -1,0 +1,13 @@
+- name: restart uhttpd
+  community.openwrt.service:
+    name: uhttpd
+    state: restarted
+
+- name: restart nginx
+  community.openwrt.service:
+    name: nginx
+    state: restarted
+
+- name: renew acme
+  ansible.builtin.raw: /etc/init.d/acme renew
+  notify: restart uhttpd

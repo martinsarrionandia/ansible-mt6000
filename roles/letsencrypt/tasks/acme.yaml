@@ -1,5 +1,11 @@
 ---
 
+- name: Set ACME account email
+  community.openwrt.uci:
+    command: set
+    key: acme.@acme[0].account_email
+    value: "{{ acme_account_email }}"
+
 - name: Configure ACME certificate
   community.openwrt.uci:
     command: section
@@ -10,7 +16,7 @@
       enabled: "1"
       validation_method: dns
       dns: dns_aws
-      keylength: "{{ acme_keylength }}"
+      key_type: "{{ acme_keytype }}"
       update_uhttpd: "1"
       domains: "{{ inventory_hostname }}"
       credentials:
@@ -22,3 +28,4 @@
   community.openwrt.uci:
     command: commit
     config: acme
+  notify: renew acme

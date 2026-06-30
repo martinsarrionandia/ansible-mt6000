@@ -1,0 +1,2 @@
+- name: renew acme
+  ansible.builtin.raw: /etc/init.d/acme renew

@@ -1,0 +1,34 @@
+- name: Point uHTTPd at ACME fullchain
+  community.openwrt.uci:
+    command: set
+    key: uhttpd.main.cert
+    value: "/etc/acme/{{ inventory_hostname }}_ecc/fullchain.cer"
+  notify: restart uhttpd
+
+- name: Point uHTTPd at ACME private key
+  community.openwrt.uci:
+    command: set
+    key: uhttpd.main.key
+    value: "/etc/acme/{{ inventory_hostname }}_ecc/{{ inventory_hostname }}.key"
+  notify: restart uhttpd
+
+- name: Commit uHTTPd config
+  community.openwrt.uci:
+    command: commit
+    config: uhttpd
+
+- name: Link GL web UI cert to ACME fullchain
+  community.openwrt.file:
+    src: "/etc/acme/{{ inventory_hostname }}_ecc/fullchain.cer"
+    dest: /etc/nginx/nginx.cer
+    state: link
+    force: true
+  notify: restart nginx
+
+- name: Link GL web UI key to ACME private key
+  community.openwrt.file:
+    src: "/etc/acme/{{ inventory_hostname }}_ecc/{{ inventory_hostname }}.key"
+    dest: /etc/nginx/nginx.key
+    state: link
+    force: true
+  notify: restart nginx
