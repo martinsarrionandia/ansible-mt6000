@@ -1,0 +1,66 @@
+# roles/dns/tasks/main.yaml
+---
+
+- name: Configure https-dns-proxy main config
+  community.openwrt.uci:
+    command: section
+    config: https-dns-proxy
+    type: main
+    name: config
+    value:
+      force_dns: "0"
+  notify: restart https-dns-proxy
+
+- name: Configure Cloudflare DoH
+  community.openwrt.uci:
+    command: section
+    config: https-dns-proxy
+    type: https-dns-proxy
+    name: cloudflare
+    value:
+      resolver_url: "https://cloudflare-dns.com/dns-query"
+      listen_addr: "127.0.0.1"
+      listen_port: "5054"
+      bootstrap_dns: "1.1.1.1,1.0.0.1"
+  notify: restart https-dns-proxy
+
+- name: Configure Google DoH
+  community.openwrt.uci:
+    command: section
+    config: https-dns-proxy
+    type: https-dns-proxy
+    name: google
+    value:
+      resolver_url: "https://dns.google/dns-query"
+      listen_addr: "127.0.0.1"
+      listen_port: "5053"
+      bootstrap_dns: "8.8.8.8,8.8.4.4"
+  notify: restart https-dns-proxy
+
+- name: Commit https-dns-proxy config
+  community.openwrt.uci:
+    command: commit
+    config: https-dns-proxy
+
+- name: Configure dnsmasq DNS resolver section
+  community.openwrt.uci:
+    command: section
+    config: dhcp
+    type: dnsmasq
+    name: "@dnsmasq[0]"
+    value:
+      noresolv: "1"
+      localservice: "0"
+      localuse: "1"
+      rebind_protection: "0"
+      filter_aaaa: "1"
+      allservers: "1"
+      server:
+        - "127.0.0.1#5054"
+        - "127.0.0.1#5053"
+  notify: restart dnsmasq
+
+- name: Commit DHCP/DNS config
+  community.openwrt.uci:
+    command: commit
+    config: dhcp

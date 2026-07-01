@@ -1,0 +1,10 @@
+- name: restart https-dns-proxy
+  community.openwrt.service:
+    name: https-dns-proxy
+    state: restarted
+  notify: restart dnsmasq
+
+- name: restart dnsmasq
+  community.openwrt.service:
+    name: dnsmasq
+    state: restarted

@@ -1,0 +1,42 @@
+---
+
+- name: Configure LAN bridge ports
+  community.openwrt.uci:
+    command: section
+    config: network
+    type: device
+    name: "{{ lan_bridge_section }}"
+    value: "{{ lan_bridge }}"
+  notify: reload network
+
+- name: Configure LAN interface
+  community.openwrt.uci:
+    command: section
+    config: network
+    type: interface
+    name: lan
+    value: "{{ lan_network }}"
+  notify: reload network
+
+- name: Configure CCTV bridge device
+  community.openwrt.uci:
+    command: section
+    config: network
+    type: device
+    name: br_cctv
+    value: "{{ cctv_bridge }}"
+  notify: reload network
+
+- name: Configure CCTV interface
+  community.openwrt.uci:
+    command: section
+    config: network
+    type: interface
+    name: cctv
+    value: "{{ cctv_network }}"
+  notify: reload network
+
+- name: Commit network config
+  community.openwrt.uci:
+    command: commit
+    config: network

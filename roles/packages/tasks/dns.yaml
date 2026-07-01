@@ -1,0 +1,9 @@
+---
+- name: Install DNS over HTTPS packages
+  community.openwrt.opkg:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - https-dns-proxy
+    - luci-app-https-dns-proxy

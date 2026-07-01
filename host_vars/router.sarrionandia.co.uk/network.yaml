@@ -1,0 +1,31 @@
+---
+lan_bridge_section: "@device[0]"
+cctv_bridge_section: br_cctv
+
+lan_bridge:
+  name: br-lan
+  type: bridge
+  ports:
+    - lan1
+    - lan2
+    - lan3
+
+lan_network:
+  device: br-lan
+  proto: static
+  ipaddr: "192.168.8.1"
+  netmask: "255.255.255.0"
+
+cctv_bridge:
+  name: br-cctv
+  type: bridge
+  ports:
+    - lan4
+    - lan5
+  bridge_empty: "1"
+
+cctv_network:
+  device: br-cctv
+  proto: static
+  ipaddr: "192.168.3.1"
+  netmask: "255.255.255.0"

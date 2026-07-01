@@ -1,0 +1,66 @@
+---
+dhcp_scopes:
+  cctv:
+    interface: cctv
+    start: "50"
+    limit: "99"
+    leasetime: 12h
+    force: "1"
+    dhcpv6: disabled
+    ra: disabled
+
+dhcp_static_leases:
+
+  duke:
+    name: duke
+    dns: "1"
+    mac: "38:D5:47:09:54:BD"
+    ip: "192.168.1.100"
+
+  google_tv:
+    name: google-tv
+    dns: "1"
+    mac: "04:F4:D8:BA:F2:B7"
+    ip: "192.168.1.101"
+
+  duke_eth0:
+    name: duke-eth0
+    dns: "1"
+    mac: "00:08:9B:D2:A3:EC"
+    ip: "192.168.1.200"
+
+  cctv_nvr:
+    name: cctv
+    dns: "1"
+    mac: "3C:6D:66:BF:48:41"
+    ip: "192.168.2.10"
+
+  powerline1:
+    name: powerline1
+    dns: "1"
+    mac: "B8:FB:B3:83:06:FF"
+    ip: "192.168.2.253"
+
+  powerline2:
+    name: powerline2
+    dns: "1"
+    mac: "B8:FB:B3:B6:DC:E0"
+    ip: "192.168.2.252"
+
+  camera_front:
+    name: camera-front
+    dns: "1"
+    mac: "50:E5:38:D8:D8:54"
+    ip: "192.168.2.101"
+
+  camera_side:
+    name: camera-side
+    dns: "1"
+    mac: "EC:71:DB:14:2A:65"
+    ip: "192.168.2.102"
+
+  camera_back:
+    name: camera-back
+    dns: "1"
+    mac: "50:E5:38:D8:D8:5A"
+    ip: "192.168.2.103"

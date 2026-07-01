@@ -1,5 +1,6 @@
 ---
 
 - import_tasks: acme.yaml
+- import_tasks: dns.yaml
   become: true
   become_user: root

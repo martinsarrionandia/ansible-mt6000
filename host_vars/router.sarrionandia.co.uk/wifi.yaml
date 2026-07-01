@@ -1,0 +1,52 @@
+wifi_options:
+  - section: mt798611
+    option: country
+    value: GB
+  - section: mt798611
+    option: htmode
+    value: HE40
+  - section: mt798611
+    option: channel
+    value: auto
+  - section: mt798611
+    option: disabled
+    value: "0"
+
+  - section: mt798612
+    option: country
+    value: GB
+  - section: mt798612
+    option: htmode
+    value: HE80
+  - section: mt798612
+    option: channel
+    value: "149"
+  - section: mt798612
+    option: disabled
+    value: "0"
+
+  - section: wifi2g
+    option: ssid
+    value: Cornholio2
+  - section: wifi2g
+    option: encryption
+    value: sae-mixed
+  - section: wifi2g
+    option: key
+    value: "{{ wifi_password }}"
+  - section: wifi2g
+    option: disabled
+    value: "0"
+
+  - section: wifi5g
+    option: ssid
+    value: Cornholio5
+  - section: wifi5g
+    option: encryption
+    value: sae-mixed
+  - section: wifi5g
+    option: key
+    value: "{{ wifi_password }}"
+  - section: wifi5g
+    option: disabled
+    value: "0"

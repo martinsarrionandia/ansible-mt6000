@@ -1,0 +1,26 @@
+---
+
+- name: Configure DHCP scopes
+  community.openwrt.uci:
+    command: section
+    config: dhcp
+    type: dhcp
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ dhcp_scopes | dict2items }}"
+  notify: restart dnsmasq
+
+- name: Configure static DHCP leases
+  community.openwrt.uci:
+    command: section
+    config: dhcp
+    type: host
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ dhcp_static_leases | dict2items }}"
+  notify: restart dnsmasq
+
+- name: Commit DHCP config
+  community.openwrt.uci:
+    command: commit
+    config: dhcp

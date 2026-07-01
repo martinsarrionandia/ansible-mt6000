@@ -7,5 +7,6 @@
     - hostname
     - packages
     - letsencrypt
+    - dns
   become: true
   become_user: root

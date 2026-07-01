@@ -1,0 +1,5 @@
+# roles/network/handlers/main.yaml
+---
+
+- name: reload network
+  ansible.builtin.raw: /etc/init.d/network reload
